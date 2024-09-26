@@ -13,6 +13,13 @@ from the Selenium/Puppeteer-based browser bot.
 > Tony Ads #2 After his DeFi dreams crashed, Tony pivoted to SocialFi, crafting a buzzword-laden pitch that had VCs practically throwing money at him, all while he secretly chuckled at the irony of his newfound success.  
 > Ping @tonyalletbot on Telegram! You can also report posts at https://tonyallet-us-report.ctf.so/
 
+## TLDR
+
+Tonyallet is a Telegram Mini App which is used by an admin bot written in Python using Selenium
+to view our "posts" and then transfer ETH to the bot's own address, which is retrieved from the Mini App's web page.
+Despite `DOMPurify` being used to avoid XSS attacks, we are able to create a post with a fake button covering the entire page,
+performing a clickjacking attack on the admin bot, causing it to load the Mini App with our own user data instead of the bot's.
+
 ## Analysis
 
 The challenge authors graciously provide us with a document describing the bots actions and our goal:
