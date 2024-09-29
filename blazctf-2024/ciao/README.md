@@ -203,7 +203,32 @@ print("\n[+] Input Data:\n", trx["input"])          # Print transaction Input Da
 > 37 37 35 66 34 37 33 30 33 30 36 34 35 66 34 63 37 35 36 33 36 62 35 66 36 64 34 36 33 33 35 32
 > 37 64 30 30 30 30 30 30 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 > ```
-> And this is exactly the call data we got from `CALL` with the use of tools sooner. Now just go ahead and decode it twice from hexadecimal to text to get the flag!
+> And this is exactly the call data we got from `CALL` with the use of tools sooner. Now just go ahead and decode it twice from hexadecimal to text to get **the flag**!
+<br />
+
+> [!TIP]
+> There are tools that translate _bytecode_ from the raw _input data_ appended to transactions into _readable code_:
+> - **Dedaub**:&emsp;[app.dedaub.com](https://app.dedaub.com/)&emsp;|&ensp;[`transaction`](https://app.dedaub.com/decompile?md5=ef8b0d161d77795ab322b905b63ffcfc)
+> <br />
+> 
+> That is how the input data we inspected looks like after _decompilation_ with the use of **Dedaub**:
+> ```solidity
+> function __function_selector__() private { 
+>     MEM[64] = 128;
+>     require(!msg.value);
+>     v0, /* uint256 */ v1 = address(0xc9b826bad20872eb29f9b1d8af4befe8460b50c6).call('2e2909d0000000000000000000000000', 
+>             '00000000000000000000000000000000', '00000020000000000000000000000000', '00000000000000000000000000000000', 
+>             '0000003d676d212054686520666c6167', '20697320626c617a7b57336c63306d65', '5f54305f5468335f70347274795f4e30',
+>             '775f473030645f4c75636b5f6d463352', '7d000000').gas(msg.gas);
+>     if (RETURNDATASIZE() != 0) {
+>         v2 = new bytes[](RETURNDATASIZE());
+>         RETURNDATACOPY(v2.data, 0, RETURNDATASIZE());
+>     }
+>     selfdestruct(msg.sender);
+> }
+> ```
+>
+> Here, the data passed into the `call(...)` is the hexadecimal representation of **the flag** that needs to be decoded only once.
 
 <br />
 
